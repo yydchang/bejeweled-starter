@@ -1,7 +1,6 @@
 const Screen = require("./screen");
 
 class Cursor {
-
   constructor(numRows, numCols) {
     this.numRows = numRows;
     this.numCols = numCols;
@@ -9,17 +8,24 @@ class Cursor {
     this.row = 0;
     this.col = 0;
 
-    this.gridColor = 'black';
-    this.cursorColor = 'yellow';
+    this.selectedRow = null;
+    this.selectedCol = null;
 
+    this.gridColor = "black";
+    this.cursorColor = "yellow";
+    this.selectedColor = "white";
   }
 
   resetBackgroundColor() {
     Screen.setBackgroundColor(this.row, this.col, this.gridColor);
   }
 
-  setBackgroundColor() {
+  setBackgroundCursorColor() {
     Screen.setBackgroundColor(this.row, this.col, this.cursorColor);
+  }
+
+  setBackgroundSelectedColor() {
+    Screen.setBackgroundColor(this.row, this.col, this.selectedColor);
   }
 
   up() {
@@ -46,6 +52,9 @@ class Cursor {
     }
   }
 
+  select() {
+    // Fill this out
+  }
 }
 
 
