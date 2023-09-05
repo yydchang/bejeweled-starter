@@ -13,7 +13,7 @@ class Bejeweled {
 
     Screen.setGridlines(false);
 
-    this.cursor.setBackgroundColor();
+    this.cursor.setBackgroundCursorColor();
     Screen.render();
   }
 

@@ -70,7 +70,6 @@ describe("Bejeweled", function () {
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
       let matches = Bejeweled.checkForMatches(grid);
-      expect(matches.length).to.equal(9);
       expect(matches).to.have.deep.members([
         { row: 4, col: 3 },
         { row: 4, col: 4 },
@@ -120,7 +119,7 @@ describe("Bejeweled", function () {
       ]);
     });
 
-    it("has items fall from the top to fill in the blank spots", function () {
+    it("has items fall to fill in the blank spots", function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
