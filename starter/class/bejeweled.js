@@ -21,21 +21,6 @@ class Bejeweled {
     // Fill this in
   }
 
-  static clearMatches(grid) {
-    // Fill this in
-  }
-
-  static dropItems(grid) {
-    // Fill this in
-  }
-
-  static fillGrid(grid) {
-    // Fill this in
-  }
-
-  static checkForValidMoves(grid) {
-    // Fill this in
-  }
 }
 
 module.exports = Bejeweled;
