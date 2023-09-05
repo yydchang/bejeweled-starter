@@ -115,7 +115,7 @@ describe("Cursor", function () {
         null,
       ]);
       expect(Screen.message).to.equal(
-        "Second selection is not adjacent to first selection. Please try again."
+        "Second selection was not adjacent to first selection. Please try again."
       );
     });
   });

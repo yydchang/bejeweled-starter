@@ -129,7 +129,7 @@ function _dropItems(grid) {
 
 // console.log(_dropItems(gridWithSpaces));
 
-function _fillGrid(grid, options) {
+function fillGrid(grid, options) {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col] === " ") {
@@ -140,7 +140,7 @@ function _fillGrid(grid, options) {
   return grid;
 }
 
-// console.log(_fillGrid(gridWithSpaces, optionsWithNumbers));
+// console.log(fillGrid(gridWithSpaces, optionsWithNumbers));
 
 function _randomize(options) {
   const randomIndex = Math.floor(Math.random() * options.length);
@@ -189,5 +189,6 @@ console.log(_hasValidMoves(gridWithMatches));
 console.log(_hasValidMoves(gridWithoutMatches));
 
 module.exports = {
-  // Fill this in
+  checkForMatches,
+  fillGrid,
 };
