@@ -110,6 +110,9 @@ class Cursor {
       Screen.grid[this.row][this.col] = temp;
       this.selectedRow = null;
       this.selectedCol = null;
+      Screen.setMessage(
+        "You've made a swap! Hit the `Enter` key to check for matches."
+      );
     } else {
       // deselect any other space
       this.resetBackgroundSelectedColor();

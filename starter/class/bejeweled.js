@@ -1,6 +1,6 @@
 const Screen = require("./screen");
 const Cursor = require("./cursor");
-const { checkForMatches, fillGrid } = require("../helpers/helpers");
+const { returnMatches, fillGrid } = require("../helpers/helpers");
 
 class Bejeweled {
   constructor() {
@@ -27,10 +27,16 @@ class Bejeweled {
       this.cursor.right.bind(this.cursor)
     );
     Screen.addCommand("space", "select", this.cursor.select.bind(this.cursor));
+    Screen.addCommand(
+      "enter",
+      "check for matches",
+      Bejeweled.checkForMatches(Screen.grid)
+    );
   }
 
   static checkForMatches(grid) {
-    // Fill this in
+    const matches = returnMatches(grid);
+    return matches;
   }
 }
 

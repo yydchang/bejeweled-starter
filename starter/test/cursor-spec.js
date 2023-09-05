@@ -118,5 +118,9 @@ describe("Cursor", function () {
         "Second selection was not adjacent to first selection. Please try again."
       );
     });
+
+    it("clears selection if the contents of the second and first selections are the same", function () {
+      expect(false).to.be.true;
+    });
   });
 });
