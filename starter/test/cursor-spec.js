@@ -71,9 +71,11 @@ describe("Cursor", function () {
 
     it("undos selection if user selects currently selected space", function () {
       cursor.selectedRow = 0;
-      cursor.selectedRow = 2;
+      cursor.selectedCol = 2;
       cursor.down();
       cursor.up();
+      cursor.right();
+      cursor.right();
       cursor.select();
       expect([cursor.selectedRow, cursor.selectedCol]).to.deep.equal([
         null,
@@ -113,7 +115,7 @@ describe("Cursor", function () {
         null,
       ]);
       expect(Screen.message).to.equal(
-        "Second space is not adjacent to first selection. Please try again."
+        "Second selection is not adjacent to first selection. Please try again."
       );
     });
   });

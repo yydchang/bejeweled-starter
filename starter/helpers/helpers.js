@@ -42,7 +42,6 @@ const gridWithoutMatches = [
   ["🕡", "👔", "➡️", "🫱🏼", "⭐️", "↙️", "🗳", "📫"],
 ];
 
-// Check for Matches Functions
 
 function checkForMatches(grid) {
   const horizontalMatches = _checkForHorizontalMatches(grid);
@@ -103,8 +102,6 @@ function _checkForVerticalMatches(grid) {
 
 // console.log(checkForMatches(gridWithMatches));
 
-// Process Matches
-
 function _clearMatches(grid) {
   const matches = checkForMatches(grid);
   for (const { row, col } of matches) {
@@ -151,7 +148,7 @@ function _randomize(options) {
   return randomOption;
 }
 
-function hasValidMoves(grid) {
+function _hasValidMoves(grid) {
   const gridCopy = [];
   for (let row = 0; row < grid.length; row++) {
     gridCopy.push([...grid[row]]);
@@ -159,39 +156,37 @@ function hasValidMoves(grid) {
   for (let row = 0; row < grid.length - 1; row++) {
     for (let col = 0; col < grid[0].length - 1; col++) {
       // check horizontal swap
-      let temp = gridCopy[row][col];
-      gridCopy[row][col] = gridCopy[row][col + 1];
-      gridCopy[row][col + 1] = temp;
+      swap(gridCopy[row][col], gridCopy[row][col + 1]);
 
       let matches = checkForMatches(gridCopy);
       if (matches.length > 0) {
         return true;
       }
 
-      temp = gridCopy[row][col];
-      gridCopy[row][col] = gridCopy[row][col + 1];
-      gridCopy[row][col + 1] = temp;
+      swap(gridCopy[row][col], gridCopy[row][col + 1]);
 
       // check for vertical swap
-      temp = gridCopy[row][col];
-      gridCopy[row][col] = gridCopy[row + 1][col];
-      gridCopy[row + 1][col] = temp;
+      swap(gridCopy[row][col], gridCopy[row + 1][col]);
 
       matches = checkForMatches(gridCopy);
       if (matches.length > 0) {
         return true;
       }
 
-      temp = gridCopy[row][col];
-      gridCopy[row][col] = gridCopy[row + 1][col];
-      gridCopy[row + 1][col] = temp;
+      swap(gridCopy[row][col], gridCopy[row + 1][col]);
     }
   }
   return false;
 }
 
-// console.log(hasValidMoves(gridWithMatches));
-// console.log(hasValidMoves(gridWithoutMatches));
+function swap(space1, space2) {
+  const temp = space1;
+  space1 = space2;
+  space2 = temp;
+}
+
+console.log(_hasValidMoves(gridWithMatches));
+console.log(_hasValidMoves(gridWithoutMatches));
 
 module.exports = {
   // Fill this in

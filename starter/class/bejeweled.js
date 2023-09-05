@@ -3,8 +3,6 @@ const Cursor = require("./cursor");
 
 class Bejeweled {
   constructor() {
-    this.playerTurn = "O";
-
     // Initialize this
     this.cursor = new Cursor(8, 8);
 
@@ -20,7 +18,6 @@ class Bejeweled {
   static checkForMatches(grid) {
     // Fill this in
   }
-
 }
 
 module.exports = Bejeweled;
