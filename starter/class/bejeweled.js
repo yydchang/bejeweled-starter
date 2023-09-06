@@ -33,20 +33,25 @@ class Bejeweled {
       this.cursor.right.bind(this.cursor)
     );
     Screen.addCommand("space", "select", this.cursor.select.bind(this.cursor));
-    Screen.addCommand(
-      "enter",
-      "check for matches",
-      Bejeweled.checkForMatches(Screen.grid)
+    Screen.addCommand("return", "check for matches", () =>
+      Bejeweled.checkForMatches(Screen.grid, this.options)
     );
   }
 
   static checkForMatches(grid, options) {
-    // Fill this in
+    Screen.setMessage("");
+    let matches = returnMatches(grid);
+    if (matches.length === 0) {
+      Screen.setMessage("Your swap didn't make any matches. Try again.");
+    } else {
+      Bejeweled.endGame();
+    }
+    Screen.render();
   }
 
   static endGame() {
     Screen.setMessage("");
-    Screen.setMessage(`No more swaps are possible. Game over.`);
+    Screen.setMessage("No more swaps are possible. Game over.");
     Screen.render();
     Screen.quit();
   }

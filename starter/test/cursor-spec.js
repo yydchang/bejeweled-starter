@@ -136,5 +136,25 @@ describe("Cursor", function () {
         "Second selection has the same item as the first selection. Please try again."
       );
     });
+
+    it("says there was an invalid swap if it doesn't return matches and returns the grid to the beginning", function () {
+      Screen.grid = [
+        ["🍓", "🍓", "🥥"],
+        ["🥝", "🥝", "🍓"],
+        ["🥝", "🥝", "🍓"],
+      ];
+      cursor.select();
+      cursor.down();
+      cursor.select();
+      expect(Screen.message).to.equal(
+        "You wouldn't have made a match if you swapped your second selection with your first selection. Try again."
+      );
+      expect(Screen.grid[0][0]).to.deep.equal("🍓");
+      expect(Screen.grid[1][0]).to.deep.equal("🥝");
+      expect([cursor.selectedRow, cursor.selectedCol]).to.deep.equal([
+        null,
+        null,
+      ]);
+    });
   });
 });

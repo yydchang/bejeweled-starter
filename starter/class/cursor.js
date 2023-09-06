@@ -96,15 +96,12 @@ class Cursor {
       this.setBackgroundCursorColor();
     } else if (
       !(
-        // swap the contents of the selected space with the newly selected space
-        (
-          ((this.row === this.selectedRow - 1 ||
-            this.row === this.selectedRow + 1) &&
-            this.col === this.selectedCol) ||
-          (this.row === this.selectedRow &&
-            (this.col === this.selectedCol + 1 ||
-              this.col === this.selectedCol - 1))
-        )
+        ((this.row === this.selectedRow - 1 ||
+          this.row === this.selectedRow + 1) &&
+          this.col === this.selectedCol) ||
+        (this.row === this.selectedRow &&
+          (this.col === this.selectedCol + 1 ||
+            this.col === this.selectedCol - 1))
       )
     ) {
       // deselect if second selection is not adjacent to the first selection
