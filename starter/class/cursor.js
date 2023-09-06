@@ -1,4 +1,5 @@
 const Screen = require("./screen");
+const { returnMatches } = require("../helpers/helpers");
 
 class Cursor {
   constructor(numRows, numCols) {
@@ -123,16 +124,30 @@ class Cursor {
         "Second selection has the same item as the first selection. Please try again."
       );
     } else {
+      // make a swap
       this.resetBackgroundSelectedColor();
       const temp = Screen.grid[this.selectedRow][this.selectedCol];
       Screen.grid[this.selectedRow][this.selectedCol] =
         Screen.grid[this.row][this.col];
       Screen.grid[this.row][this.col] = temp;
-      this.selectedRow = null;
-      this.selectedCol = null;
-      Screen.setMessage(
-        "You've made a swap! Hit the `Enter` key to check for matches."
-      );
+
+      if (returnMatches(Screen.grid).length > 0) {
+        // if swap does result in matches, get ready to check for matches
+        this.selectedRow = null;
+        this.selectedCol = null;
+        Screen.setMessage(
+          "You've made a swap! Hit the `Enter` key to check for matches."
+        );
+      } else {
+        // if swap does not result in matches, swap back
+        const temp = Screen.grid[this.selectedRow][this.selectedCol];
+        Screen.grid[this.selectedRow][this.selectedCol] =
+          Screen.grid[this.row][this.col];
+        Screen.grid[this.row][this.col] = temp;
+        this.selectedRow = null;
+        this.selectedCol = null;
+        Screen.setMessage("You didn't make a match. Try again.");
+      }
     }
     this.setBackgroundSelectedColor();
     Screen.render();

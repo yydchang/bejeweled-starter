@@ -146,9 +146,7 @@ describe("Cursor", function () {
       cursor.select();
       cursor.down();
       cursor.select();
-      expect(Screen.message).to.equal(
-        "You wouldn't have made a match if you swapped your second selection with your first selection. Try again."
-      );
+      expect(Screen.message).to.equal("You didn't make a match. Try again.");
       expect(Screen.grid[0][0]).to.deep.equal("🍓");
       expect(Screen.grid[1][0]).to.deep.equal("🥝");
       expect([cursor.selectedRow, cursor.selectedCol]).to.deep.equal([
