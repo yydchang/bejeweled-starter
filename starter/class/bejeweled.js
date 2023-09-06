@@ -14,9 +14,13 @@ class Bejeweled {
 
     // Initialize grid
     Screen.initialize(8, 8);
-    this.grid = Screen.grid;
     Screen.setGridlines(false);
-    fillGrid(this.grid, this.options);
+    fillGrid(Screen.grid, this.options);
+    while (returnMatches(Screen.grid).length > 0) {
+      Screen.grid = clearMatches(Screen.grid);
+      Screen.grid = dropItems(Screen.grid);
+      Screen.grid = fillGrid(Screen.grid, this.options);
+    }
 
     // Initialize cursor
     this.cursor = new Cursor(8, 8);
@@ -40,10 +44,19 @@ class Bejeweled {
 
   static checkForMatches(grid, options) {
     Screen.setMessage("");
-    let matches = returnMatches(grid);
-    if (matches.length === 0) {
-      Screen.setMessage("Your swap didn't make any matches. Try again.");
-    } else {
+    while (returnMatches(grid).length > 0) {
+      // clear matches
+      // highlight matches
+      // gain points for each match
+      grid = clearMatches(grid);
+
+      // drop items
+      grid = dropItems(grid);
+
+      // fill grid
+      grid = fillGrid(grid, options);
+    }
+    if (!hasValidMoves(grid)) {
       Bejeweled.endGame();
     }
     Screen.render();

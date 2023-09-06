@@ -21,6 +21,10 @@ describe("Bejeweled", function () {
       expect(Screen.grid).to.have.a.lengthOf(8);
       expect(Screen.grid[0]).to.have.a.lengthOf(8);
     });
+
+    it("fills the board with a set of items that have no matches but does have valid moves", function () {
+      expect(returnMatches(Screen.grid).length).to.equal(0);
+    });
   });
 
   describe("check for swaps", function () {
