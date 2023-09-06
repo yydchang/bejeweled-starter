@@ -95,14 +95,37 @@ class Cursor {
       this.selectedCol = null;
       this.setBackgroundCursorColor();
     } else if (
-      // swap the contents of the selected space with the newly selected space
-      ((this.row === this.selectedRow - 1 ||
-        this.row === this.selectedRow + 1) &&
-        this.col === this.selectedCol) ||
-      (this.row === this.selectedRow &&
-        (this.col === this.selectedCol + 1 ||
-          this.col === this.selectedCol - 1))
+      !(
+        // swap the contents of the selected space with the newly selected space
+        (
+          ((this.row === this.selectedRow - 1 ||
+            this.row === this.selectedRow + 1) &&
+            this.col === this.selectedCol) ||
+          (this.row === this.selectedRow &&
+            (this.col === this.selectedCol + 1 ||
+              this.col === this.selectedCol - 1))
+        )
+      )
     ) {
+      // deselect if second selection is not adjacent to the first selection
+      this.resetBackgroundSelectedColor();
+      this.selectedRow = null;
+      this.selectedCol = null;
+      Screen.setMessage(
+        "Second selection was not adjacent to first selection. Please try again."
+      );
+    } else if (
+      Screen.grid[this.selectedRow][this.selectedCol] ===
+      Screen.grid[this.row][this.col]
+    ) {
+      // deselect if user selects spaces with the same content
+      this.resetBackgroundSelectedColor();
+      this.selectedRow = null;
+      this.selectedCol = null;
+      Screen.setMessage(
+        "Second selection has the same item as the first selection. Please try again."
+      );
+    } else {
       this.resetBackgroundSelectedColor();
       const temp = Screen.grid[this.selectedRow][this.selectedCol];
       Screen.grid[this.selectedRow][this.selectedCol] =
@@ -112,14 +135,6 @@ class Cursor {
       this.selectedCol = null;
       Screen.setMessage(
         "You've made a swap! Hit the `Enter` key to check for matches."
-      );
-    } else {
-      // deselect any other space
-      this.resetBackgroundSelectedColor();
-      this.selectedRow = null;
-      this.selectedCol = null;
-      Screen.setMessage(
-        "Second selection was not adjacent to first selection. Please try again."
       );
     }
     this.setBackgroundSelectedColor();

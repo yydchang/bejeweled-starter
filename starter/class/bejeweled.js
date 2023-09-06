@@ -1,16 +1,22 @@
 const Screen = require("./screen");
 const Cursor = require("./cursor");
-const { returnMatches, fillGrid } = require("../helpers/helpers");
+const {
+  returnMatches,
+  clearMatches,
+  dropItems,
+  fillGrid,
+  hasValidMoves,
+} = require("../helpers/helpers");
 
 class Bejeweled {
   constructor() {
-    const options = ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇"];
+    this.options = ["🥝", "🍓", "🥥", "🍇", "🍊"];
 
     // Initialize grid
     Screen.initialize(8, 8);
     this.grid = Screen.grid;
     Screen.setGridlines(false);
-    fillGrid(this.grid, options);
+    fillGrid(this.grid, this.options);
 
     // Initialize cursor
     this.cursor = new Cursor(8, 8);
@@ -34,9 +40,15 @@ class Bejeweled {
     );
   }
 
-  static checkForMatches(grid) {
-    const matches = returnMatches(grid);
-    return matches;
+  static checkForMatches(grid, options) {
+    // Fill this in
+  }
+
+  static endGame() {
+    Screen.setMessage("");
+    Screen.setMessage(`No more swaps are possible. Game over.`);
+    Screen.render();
+    Screen.quit();
   }
 }
 

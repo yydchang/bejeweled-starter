@@ -120,7 +120,21 @@ describe("Cursor", function () {
     });
 
     it("clears selection if the contents of the second and first selections are the same", function () {
-      expect(false).to.be.true;
+      Screen.grid = [
+        ["🍓", "🍓", "🥥"],
+        ["🥝", "🥝", "🍓"],
+        ["🥝", "🥝", "🍓"],
+      ];
+      cursor.select();
+      cursor.right();
+      cursor.select();
+      expect([cursor.selectedRow, cursor.selectedCol]).to.deep.equal([
+        null,
+        null,
+      ]);
+      expect(Screen.message).to.equal(
+        "Second selection has the same item as the first selection. Please try again."
+      );
     });
   });
 });
