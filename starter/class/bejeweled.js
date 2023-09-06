@@ -6,6 +6,7 @@ const {
   dropItems,
   fillGrid,
   hasValidMoves,
+  sleep,
 } = require("../helpers/helpers");
 
 class Bejeweled {
@@ -37,24 +38,29 @@ class Bejeweled {
       this.cursor.right.bind(this.cursor)
     );
     Screen.addCommand("space", "select", this.cursor.select.bind(this.cursor));
-    Screen.addCommand("return", "check for matches", () =>
+    Screen.addCommand("return", "check for matches", async () =>
       Bejeweled.checkForMatches(Screen.grid, this.options)
     );
   }
 
-  static checkForMatches(grid, options) {
+  static async checkForMatches(grid, options) {
     Screen.setMessage("");
     while (returnMatches(grid).length > 0) {
       // clear matches
       // highlight matches
       // gain points for each match
       grid = clearMatches(grid);
+      Screen.render();
 
       // drop items
+      await sleep(500);
       grid = dropItems(grid);
+      Screen.render();
 
       // fill grid
+      await sleep(500);
       grid = fillGrid(grid, options);
+      Screen.render();
     }
     if (!hasValidMoves(grid)) {
       Bejeweled.endGame();

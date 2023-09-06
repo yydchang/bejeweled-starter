@@ -132,10 +132,15 @@ function _swap(grid, row1, col1, row2, col2) {
   grid[row2][col2] = temp;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 module.exports = {
   returnMatches,
   clearMatches,
   dropItems,
   fillGrid,
   hasValidMoves,
+  sleep,
 };
