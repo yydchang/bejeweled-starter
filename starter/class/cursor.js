@@ -1,5 +1,5 @@
 const Screen = require("./screen");
-const { returnMatches } = require("../helpers/helpers");
+const { returnMatches, swap } = require("../helpers/helpers");
 
 class Cursor {
   constructor(numRows, numCols) {
@@ -126,10 +126,7 @@ class Cursor {
     } else {
       // make a swap
       this.resetBackgroundSelectedColor();
-      const temp = Screen.grid[this.selectedRow][this.selectedCol];
-      Screen.grid[this.selectedRow][this.selectedCol] =
-        Screen.grid[this.row][this.col];
-      Screen.grid[this.row][this.col] = temp;
+      swap(Screen.grid, this.selectedRow, this.selectedCol, this.row, this.col);
 
       if (returnMatches(Screen.grid).length > 0) {
         // if swap does result in matches, get ready to check for matches
@@ -140,10 +137,13 @@ class Cursor {
         );
       } else {
         // if swap does not result in matches, swap back
-        const temp = Screen.grid[this.selectedRow][this.selectedCol];
-        Screen.grid[this.selectedRow][this.selectedCol] =
-          Screen.grid[this.row][this.col];
-        Screen.grid[this.row][this.col] = temp;
+        swap(
+          Screen.grid,
+          this.selectedRow,
+          this.selectedCol,
+          this.row,
+          this.col
+        );
         this.selectedRow = null;
         this.selectedCol = null;
         Screen.setMessage("You didn't make a match. Try again.");

@@ -6,6 +6,7 @@ const {
   dropItems,
   fillGrid,
   hasValidMoves,
+  swap,
   sleep,
 } = require("../helpers/helpers");
 
@@ -47,8 +48,6 @@ class Bejeweled {
     Screen.setMessage("");
     while (returnMatches(grid).length > 0) {
       // clear matches
-      // highlight matches
-      // gain points for each match
       grid = clearMatches(grid);
       Screen.render();
 

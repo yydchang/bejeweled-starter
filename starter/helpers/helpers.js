@@ -102,31 +102,31 @@ function hasValidMoves(grid) {
   }
   for (let row = 0; row < grid.length - 1; row++) {
     for (let col = 0; col < grid[0].length - 1; col++) {
-      // check horizontal _swap
-      _swap(gridCopy, row, col, row, col + 1);
+      // check horizontal swap
+      swap(gridCopy, row, col, row, col + 1);
 
       let matches = returnMatches(gridCopy);
       if (matches.length > 0) {
         return true;
       }
 
-      _swap(gridCopy, row, col, row, col + 1);
+      swap(gridCopy, row, col, row, col + 1);
 
-      // check for vertical _swap
-      _swap(gridCopy, row, col, row + 1, col);
+      // check for vertical swap
+      swap(gridCopy, row, col, row + 1, col);
 
       matches = returnMatches(gridCopy);
       if (matches.length > 0) {
         return true;
       }
 
-      _swap(gridCopy, row, col, row + 1, col);
+      swap(gridCopy, row, col, row + 1, col);
     }
   }
   return false;
 }
 
-function _swap(grid, row1, col1, row2, col2) {
+function swap(grid, row1, col1, row2, col2) {
   const temp = grid[row1][col1];
   grid[row1][col1] = grid[row2][col2];
   grid[row2][col2] = temp;
@@ -142,5 +142,6 @@ module.exports = {
   dropItems,
   fillGrid,
   hasValidMoves,
+  swap,
   sleep,
 };
