@@ -4,6 +4,7 @@ const {
   returnMatches,
   clearMatches,
   dropItems,
+  explodeMatches,
   fillGrid,
   hasValidMoves,
   swap,
@@ -47,7 +48,12 @@ class Bejeweled {
   static async checkForMatches(grid, options) {
     Screen.setMessage("");
     while (returnMatches(grid).length > 0) {
+      // explode matches
+      grid = explodeMatches(grid);
+      Screen.render();
+
       // clear matches
+      await sleep(500);
       grid = clearMatches(grid);
       Screen.render();
 

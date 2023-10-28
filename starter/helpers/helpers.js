@@ -55,6 +55,14 @@ function _returnVerticalMatches(grid) {
   return matches;
 }
 
+function explodeMatches(grid) {
+  const matches = returnMatches(grid);
+  for (const { row, col } of matches) {
+    grid[row][col] = "💥";
+  }
+  return grid;
+}
+
 function clearMatches(grid) {
   const matches = returnMatches(grid);
   for (const { row, col } of matches) {
@@ -140,6 +148,7 @@ module.exports = {
   returnMatches,
   clearMatches,
   dropItems,
+  explodeMatches,
   fillGrid,
   hasValidMoves,
   swap,
