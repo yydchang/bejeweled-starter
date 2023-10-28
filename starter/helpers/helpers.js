@@ -58,7 +58,7 @@ function _returnVerticalMatches(grid) {
 function clearMatches(grid) {
   const matches = returnMatches(grid);
   for (const { row, col } of matches) {
-    grid[row][col] = " ";
+    grid[row][col] = "  ";
   }
   return grid;
 }
@@ -67,7 +67,7 @@ function dropItems(grid) {
   for (let col = 0; col < grid[0].length; col++) {
     let p = grid.length - 1;
     for (let row = grid.length - 1; row >= 0; row--) {
-      if (grid[row][col] !== " ") {
+      if (grid[row][col] !== "  ") {
         const temp = grid[p][col];
         grid[p][col] = grid[row][col];
         grid[row][col] = temp;
@@ -81,7 +81,7 @@ function dropItems(grid) {
 function fillGrid(grid, options) {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
-      if (grid[row][col] === " ") {
+      if (grid[row][col] === "  ") {
         grid[row][col] = _randomize(options);
       }
     }
