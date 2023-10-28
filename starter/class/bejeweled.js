@@ -7,7 +7,6 @@ const {
   explodeMatches,
   fillGrid,
   hasValidMoves,
-  swap,
   sleep,
 } = require("../helpers/helpers");
 

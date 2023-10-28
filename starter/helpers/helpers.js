@@ -151,6 +151,6 @@ module.exports = {
   explodeMatches,
   fillGrid,
   hasValidMoves,
-  swap,
   sleep,
+  swap,
 };
