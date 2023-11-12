@@ -1,4 +1,8 @@
-const { expect } = require('chai');
+const chai = require("chai");
+const chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+const expect = chai.expect;
+
 const Screen = require("../class/screen");
 const Bejeweled = require("../class/bejeweled.js");
 const { returnMatches } = require("../helpers/helpers.js");
@@ -27,8 +31,8 @@ describe("Bejeweled", function () {
     });
   });
 
-  describe("check for swaps", function () {
-    it("matches three in a row continuously until the grid has no more matches left", function () {
+  describe("check for matches", function () {
+    it("matches three in a row continuously until the grid has no more matches left", async function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
@@ -40,25 +44,8 @@ describe("Bejeweled", function () {
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
       options = ["zero", "one", "two", "three"];
-
-      Bejeweled.checkForMatches(grid, options);
-      expect(returnMatches(grid)).to.be.empty;
+      await Bejeweled.checkForMatches(grid, options);
+      expect(returnMatches(grid).length).to.equal(0);
     });
-
-    // it("ends the game when no valid moves are left", function () {
-    //   grid = [
-    //     ["🥝", "🍓", "🥥", "🍇", "🔥", "☺️", "😚", "🧮"],
-    //     ["✈️", "🩹", "🎟", "🧑🏼", "🚡", "🛬", "🛫", "⏰"],
-    //     ["⚗️", "👽", "🚑", "👾", "🏺", "🏈", "🛏", "🐝"],
-    //     ["🪲", "🧗🏼", "🍺", "🏛", "🔃", "📀", "⭐️", "✡️"],
-    //     ["🕡", "👔", "➡️", "🫱🏼", "⭐️", "↙️", "🗳", "📫"],
-    //     ["⚗️", "👽", "🚑", "👾", "🏺", "🏈", "🛏", "🐝"],
-    //     ["🪲", "🧗🏼", "🍺", "🏛", "🔃", "📀", "⭐️", "✡️"],
-    //     ["🕡", "👔", "➡️", "🫱🏼", "⭐️", "↙️", "🗳", "📫"],
-    //   ];
-    //   options = ["new"];
-    //   // Bejeweled.checkForMatches(grid, options);
-    //   expect(Screen.message).to.equal("No more swaps are possible. Game over.");
-    // });
   });
 });
