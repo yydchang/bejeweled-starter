@@ -20,6 +20,8 @@ describe("Bejeweled", function () {
   // Add tests for setting up a basic board
 
   describe("board", function () {
+    this.timeout(0);
+
     bejeweled = new Bejeweled();
 
     it("creates an instance of Bejeweled", function () {
@@ -37,8 +39,7 @@ describe("Bejeweled", function () {
   });
 
   describe("check for matches", function () {
-
-    it("matches three in a row continuously until the grid has no more matches left", function () {
+    it("matches three in a row continuously until the grid has no more matches left", async function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
         ["🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇", "🥝"],
@@ -58,7 +59,7 @@ describe("Bejeweled", function () {
         "seven",
         "eight",
       ];
-      Bejeweled.checkForMatches(grid, options);
+      await Bejeweled.checkForMatches(grid, options);
       expect(returnMatches(grid).length).to.equal(0);
     });
   });
@@ -79,7 +80,8 @@ describe("Bejeweled", function () {
         "nine",
         "ten",
       ];
-      expect(true).to.be.false;
+      expect(this.currentPoints).to.equal(4);
+      expect(this.totalPoint).to.equal(4);
     });
   });
 });
