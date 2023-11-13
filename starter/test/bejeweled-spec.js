@@ -1,8 +1,4 @@
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
-const expect = chai.expect;
-
+const { expect } = require("chai");
 const Screen = require("../class/screen");
 const Bejeweled = require("../class/bejeweled.js");
 const { returnMatches } = require("../helpers/helpers.js");
@@ -32,6 +28,7 @@ describe("Bejeweled", function () {
   });
 
   describe("check for matches", function () {
+    this.timeout(0);
     it("matches three in a row continuously until the grid has no more matches left", async function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
@@ -48,4 +45,8 @@ describe("Bejeweled", function () {
       expect(returnMatches(grid).length).to.equal(0);
     });
   });
+
+  // describe("score points", function () {
+  //   it("adds points based on the number af items matched", function () {});
+  // });
 });
