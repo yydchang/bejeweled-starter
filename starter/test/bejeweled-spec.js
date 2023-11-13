@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const sinon = require("sinon");
 const Screen = require("../class/screen");
 const Bejeweled = require("../class/bejeweled.js");
 const { returnMatches } = require("../helpers/helpers.js");
@@ -7,6 +8,11 @@ describe("Bejeweled", function () {
   let bejeweled;
   let grid;
   let options;
+
+  sinon.stub(Screen, "render");
+  after(() => {
+    Screen.quit();
+  });
 
   // Add tests for setting up a basic board
 
@@ -40,7 +46,7 @@ describe("Bejeweled", function () {
         ["🍇", "🍇", "🍇", "🍇", "🥝", "🥝", "🍓", "🥥"],
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
-      options = ["zero", "one", "two", "three"];
+      options = ["zero", "one", "two", "three", "four", "five"];
       await Bejeweled.checkForMatches(grid, options);
       expect(returnMatches(grid).length).to.equal(0);
     });
