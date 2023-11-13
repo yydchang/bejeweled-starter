@@ -1,5 +1,6 @@
 const Screen = require("./screen");
 const Cursor = require("./cursor");
+const helpers = require("../helpers/helpers");
 const {
   returnMatches,
   clearMatches,
@@ -7,8 +8,7 @@ const {
   explodeMatches,
   fillGrid,
   hasValidMoves,
-  sleep,
-} = require("../helpers/helpers");
+} = helpers;
 
 class Bejeweled {
   constructor() {
@@ -52,17 +52,17 @@ class Bejeweled {
       Screen.render();
 
       // clear matches
-      await sleep(500);
+      await helpers.sleep(500);
       grid = clearMatches(grid);
       Screen.render();
 
       // drop items
-      await sleep(500);
+      await helpers.sleep(500);
       grid = dropItems(grid);
       Screen.render();
 
       // fill grid
-      await sleep(500);
+      await helpers.sleep(500);
       grid = fillGrid(grid, options);
       Screen.render();
     }

@@ -99,8 +99,7 @@ function fillGrid(grid, options) {
 
 function _randomize(options) {
   const randomIndex = Math.floor(Math.random() * options.length);
-  const randomOption = options[randomIndex];
-  return randomOption;
+  return options[randomIndex];
 }
 
 function hasValidMoves(grid) {
