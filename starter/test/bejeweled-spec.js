@@ -37,8 +37,8 @@ describe("Bejeweled", function () {
   });
 
   describe("check for matches", function () {
-    this.timeout(0);
-    it("matches three in a row continuously until the grid has no more matches left", async function () {
+
+    it("matches three in a row continuously until the grid has no more matches left", function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
         ["🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇", "🥝"],
@@ -58,7 +58,7 @@ describe("Bejeweled", function () {
         "seven",
         "eight",
       ];
-      await Bejeweled.checkForMatches(grid, options);
+      Bejeweled.checkForMatches(grid, options);
       expect(returnMatches(grid).length).to.equal(0);
     });
   });
