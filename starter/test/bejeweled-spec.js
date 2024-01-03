@@ -59,7 +59,7 @@ describe("Bejeweled", function () {
         "seven",
         "eight",
       ];
-      await Bejeweled.checkForMatches(grid, options);
+      await Bejeweled.handleMove(grid, options);
       expect(returnMatches(grid).length).to.equal(0);
     });
   });
@@ -80,8 +80,8 @@ describe("Bejeweled", function () {
         "nine",
         "ten",
       ];
-      expect(this.currentPoints).to.equal(4);
-      expect(this.totalPoint).to.equal(4);
+      expect(this.moveScore).to.equal(20);
+      expect(this.totalScore).to.equal(20);
     });
   });
 });

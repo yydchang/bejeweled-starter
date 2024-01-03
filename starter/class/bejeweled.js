@@ -40,12 +40,14 @@ class Bejeweled {
     );
     Screen.addCommand("space", "select", this.cursor.select.bind(this.cursor));
     Screen.addCommand("return", "check for matches", async () =>
-      Bejeweled.checkForMatches(Screen.grid, this.options)
+      Bejeweled.handleMove(Screen.grid, this.options)
     );
   }
 
-  static async checkForMatches(grid, options) {
+  static async handleMove(grid, options) {
     Screen.setMessage("");
+
+    // process move
     while (returnMatches(grid).length > 0) {
       // explode matches
       grid = explodeMatches(grid);
