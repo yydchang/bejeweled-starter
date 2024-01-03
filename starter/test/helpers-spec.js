@@ -68,15 +68,28 @@ describe("Helpers", function () {
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
       let matches = returnMatches(grid);
-      expect(matches).to.deep.include({ row: 4, col: 3 });
-      expect(matches).to.deep.include({ row: 4, col: 4 });
-      expect(matches).to.deep.include({ row: 5, col: 3 });
-      expect(matches).to.deep.include({ row: 5, col: 4 });
-      expect(matches).to.deep.include({ row: 6, col: 0 });
-      expect(matches).to.deep.include({ row: 6, col: 1 });
-      expect(matches).to.deep.include({ row: 6, col: 2 });
-      expect(matches).to.deep.include({ row: 6, col: 3 });
-      expect(matches).to.deep.include({ row: 6, col: 4 });
+      expect(matches.length).to.equal(1);
+      expect(matches).to.eql([
+        // horizontal match of grapes
+        [
+          { row: 6, col: 0 },
+          { row: 6, col: 1 },
+          { row: 6, col: 2 },
+          { row: 6, col: 3 },
+        ],
+        // vertical match of grapes
+        [
+          { row: 4, col: 3 },
+          { row: 5, col: 3 },
+          { row: 6, col: 3 },
+        ],
+        // vertical match of kiwis
+        [
+          { row: 4, col: 4 },
+          { row: 5, col: 4 },
+          { row: 6, col: 4 },
+        ],
+      ]);
     });
   });
 
