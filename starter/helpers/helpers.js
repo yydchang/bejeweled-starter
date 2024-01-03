@@ -7,6 +7,7 @@ function returnMatches(grid) {
 
 function _returnHorizontalMatches(grid) {
   const matches = [];
+  let currentMatch = [];
   for (let row = 0; row < grid.length; row++) {
     const window = {};
     let left = 0;
@@ -15,14 +16,18 @@ function _returnHorizontalMatches(grid) {
       window[currentEl] = (window[currentEl] || 0) + 1;
       if (Object.keys(window).length === 1) {
         if (right - left + 1 === 3) {
-          matches.push({ row, col: left });
-          matches.push({ row, col: left + 1 });
-          matches.push({ row, col: right });
+          currentMatch.push({ row, col: left });
+          currentMatch.push({ row, col: left + 1 });
+          currentMatch.push({ row, col: right });
         } else if (right - left + 1 > 3) {
-          matches.push({ row, col: right });
+          currentMatch.push({ row, col: right });
         }
       } else {
+        if (currentMatch.length > 0) {
+          matches.push(currentMatch);
+        }
         delete window[grid[row][left]];
+        currentMatch = [];
         left = right;
       }
     }
