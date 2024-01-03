@@ -37,6 +37,7 @@ function _returnHorizontalMatches(grid) {
 
 function _returnVerticalMatches(grid) {
   const matches = [];
+  let currentMatch = [];
   for (let col = 0; col < grid[0].length; col++) {
     const window = {};
     let top = 0;
@@ -45,14 +46,18 @@ function _returnVerticalMatches(grid) {
       window[currentEl] = (window[currentEl] || 0) + 1;
       if (Object.keys(window).length === 1) {
         if (bottom - top + 1 === 3) {
-          matches.push({ row: top, col });
-          matches.push({ row: top + 1, col });
-          matches.push({ row: bottom, col });
+          currentMatch.push({ row: top, col });
+          currentMatch.push({ row: top + 1, col });
+          currentMatch.push({ row: bottom, col });
         } else if (bottom - top + 1 > 3) {
-          matches.push({ row: bottom, col });
+          currentMatch.push({ row: bottom, col });
         }
       } else {
+        if (currentMatch.length > 0) {
+          matches.push(currentMatch);
+        }
         delete window[grid[top][col]];
+        currentMatch = [];
         top = bottom;
       }
     }
