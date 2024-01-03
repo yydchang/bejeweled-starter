@@ -11,6 +11,7 @@ describe("Helpers", function () {
   let grid;
 
   describe("swaps", function () {
+
     it("matches items vertically", function () {
       grid = [
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
@@ -23,10 +24,14 @@ describe("Helpers", function () {
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
       let matches = returnMatches(grid);
-      expect(matches.length).to.equal(3);
-      expect(matches).to.deep.include({ row: 0, col: 1 });
-      expect(matches).to.deep.include({ row: 1, col: 1 });
-      expect(matches).to.deep.include({ row: 2, col: 1 });
+      expect(matches.length).to.equal(1);
+      expect(matches).to.eql([
+        [
+          { row: 0, col: 1 },
+          { row: 1, col: 1 },
+          { row: 2, col: 1 },
+        ],
+      ]);
     });
 
     it("matches items horizontally", function () {
