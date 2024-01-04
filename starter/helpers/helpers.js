@@ -31,6 +31,10 @@ function _returnHorizontalMatches(grid) {
         left = right;
       }
     }
+    if (currentMatch.length > 0) {
+      matches.push(currentMatch);
+      currentMatch = [];
+    }
   }
   return matches;
 }
@@ -69,18 +73,20 @@ function _returnVerticalMatches(grid) {
   return matches;
 }
 
-function explodeMatches(grid) {
-  const matches = returnMatches(grid);
-  for (const { row, col } of matches) {
-    grid[row][col] = "💥";
+function explodeMatches(matches, grid) {
+  for (const match of matches) {
+    for (const { row, col } of match) {
+      grid[row][col] = "💥";
+    }
   }
   return grid;
 }
 
-function clearMatches(grid) {
-  const matches = returnMatches(grid);
-  for (const { row, col } of matches) {
-    grid[row][col] = "  ";
+function clearMatches(matches, grid) {
+  for (const match of matches) {
+    for (const { row, col } of match) {
+      grid[row][col] = "  ";
+    }
   }
   return grid;
 }

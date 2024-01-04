@@ -19,7 +19,8 @@ class Bejeweled {
     Screen.setGridlines(false);
     fillGrid(Screen.grid, this.options);
     while (returnMatches(Screen.grid).length > 0) {
-      Screen.grid = clearMatches(Screen.grid);
+      const matches = returnMatches(Screen.grid);
+      Screen.grid = clearMatches(matches, Screen.grid);
       Screen.grid = dropItems(Screen.grid);
       Screen.grid = fillGrid(Screen.grid, this.options);
     }
@@ -50,12 +51,15 @@ class Bejeweled {
     // process move
     while (returnMatches(grid).length > 0) {
       // explode matches
-      grid = explodeMatches(grid);
+      const matches = returnMatches(grid);
+
+      grid = explodeMatches(matches, grid);
       Screen.render();
 
       // clear matches
       await helpers.sleep(500);
-      grid = clearMatches(grid);
+
+      grid = clearMatches(matches, grid);
       Screen.render();
 
       // drop items
