@@ -31,10 +31,6 @@ function _returnHorizontalMatches(grid) {
         left = right;
       }
     }
-    if (currentMatch.length > 0) {
-      matches.push(currentMatch);
-      currentMatch = [];
-    }
   }
   return matches;
 }
