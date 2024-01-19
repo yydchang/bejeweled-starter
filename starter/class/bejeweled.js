@@ -13,6 +13,10 @@ const {
 class Bejeweled {
   constructor() {
     this.options = ["🥝", "🍓", "🥥", "🍇", "🍊"];
+    this.totalScore = 0;
+    this.moveScore = 0;
+    this.comboCount = 0;
+    this.baseValue = 10;
 
     // Initialize grid
     Screen.initialize(8, 8);
@@ -45,14 +49,39 @@ class Bejeweled {
     );
   }
 
+  // score matches function definition
+  static scoreMatches(matches, baseValue, comboCount) {
+    let allMatchesScore = 0;
+
+    for (const match of matches) {
+      const lengthScore = (match.length - 2) * baseValue;
+      const comboBonus = comboCount * baseValue;
+      const matchScore = lengthScore + comboBonus;
+      allMatchesScore += matchScore;
+      comboCount++;
+    }
+
+    return [allMatchesScore, comboCount];
+  }
+
   static async handleMove(grid, options) {
     Screen.setMessage("");
 
     // process move
     while (returnMatches(grid).length > 0) {
-      // explode matches
       const matches = returnMatches(grid);
 
+      // call score matches function
+      const [allMatchesScore, currentComboCount] = Bejeweled.scoreMatches(
+        matches,
+        this.baseValue,
+        this.comboCount
+      );
+
+      this.comboCount = currentComboCount;
+      this.moveScore += allMatchesScore;
+
+      // explode matches
       grid = explodeMatches(matches, grid);
       Screen.render();
 
@@ -72,6 +101,13 @@ class Bejeweled {
       grid = fillGrid(grid, options);
       Screen.render();
     }
+
+    // handle points
+    this.totalScore += this.moveScore;
+    this.moveScore = 0;
+    this.comboCount = 0;
+
+    // check if game is still playable
     if (!hasValidMoves(grid)) {
       Bejeweled.endGame();
     }

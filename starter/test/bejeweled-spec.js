@@ -65,8 +65,8 @@ describe("Bejeweled", function () {
   });
 
   describe("score points", function () {
-    it("todo: adds points based on the number of items matched", function () {
-      grid = ["🍇", "🍇", "🍇", "🍇"];
+    it("adds points based on the number of items in the match", async function () {
+      grid = [["🍇", "🍇", "🍇", "🍇"]];
       options = [
         "zero",
         "one",
@@ -80,8 +80,15 @@ describe("Bejeweled", function () {
         "nine",
         "ten",
       ];
-      expect(this.moveScore).to.equal(20);
-      expect(this.totalScore).to.equal(20);
+
+      const matches = returnMatches(grid);
+      const [allMatchesScore, currentComboCount] = Bejeweled.scoreMatches(
+        matches,
+        10,
+        0
+      );
+      expect(allMatchesScore).to.equal(20);
+      expect(currentComboCount).to.equal(1);
     });
   });
 });

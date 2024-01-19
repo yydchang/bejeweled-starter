@@ -109,7 +109,7 @@ describe("Helpers", function () {
         ["🍇", "🍇", "🍇", "🍇", "🥝", "🥝", "🍓", "🥥"],
         ["🍇", "🍊", "🍇", "🥝", "🍇", "🥝", "🍓", "🥥"],
       ];
-      const matches = returnMatches(grid);
+      let matches = returnMatches(grid);
       grid = clearMatches(matches, grid);
       expect(grid).to.have.deep.ordered.members([
         ["🥝", "🍓", "🥥", "🍇", "🍊", "🍇", "🥝", "🍇"],
