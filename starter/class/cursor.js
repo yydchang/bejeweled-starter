@@ -84,7 +84,6 @@ class Cursor {
   }
 
   select() {
-    Screen.setMessage("");
     if (this.selectedRow === null && this.selectedCol === null) {
       // select space if no space is currently selected
       this.selectedRow = this.row;

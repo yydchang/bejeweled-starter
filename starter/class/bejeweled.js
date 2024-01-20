@@ -44,8 +44,10 @@ class Bejeweled {
       this.cursor.right.bind(this.cursor)
     );
     Screen.addCommand("space", "select", this.cursor.select.bind(this.cursor));
-    Screen.addCommand("return", "check for matches", async () =>
-      Bejeweled.handleMove(Screen.grid, this.options)
+    Screen.addCommand(
+      "return",
+      "check for matches",
+      async () => Bejeweled.handleMove.bind(this)(Screen.grid, this.options) // use bind to return a function that remembers that "this" is the instance of Bejeweled instead of the calling code in Screen
     );
   }
 
@@ -65,7 +67,7 @@ class Bejeweled {
   }
 
   static async handleMove(grid, options) {
-    Screen.setMessage("");
+    Screen.setMessage(`Total Score: ${this.totalScore}`);
 
     // process move
     while (returnMatches(grid).length > 0) {
@@ -83,6 +85,7 @@ class Bejeweled {
 
       // explode matches
       grid = explodeMatches(matches, grid);
+      Screen.setMessage(`Total Score: ${this.totalScore} +${this.moveScore}`);
       Screen.render();
 
       // clear matches
@@ -106,6 +109,9 @@ class Bejeweled {
     this.totalScore += this.moveScore;
     this.moveScore = 0;
     this.comboCount = 0;
+
+    Screen.setMessage(`Total Score: ${this.totalScore}`);
+    Screen.render();
 
     // check if game is still playable
     if (!hasValidMoves(grid)) {
